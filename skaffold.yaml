@@ -5,7 +5,7 @@ build:
   - image: ducvn256/dat-project
     context: .
     docker:
-      dockerfile: ./Dockerfile
+      dockerfile: ./WebApplication/WebApplication/Dockerfile
   tagPolicy:
     envTemplate:
       template: '{{.DOCKER_REGISTRY}}/{{.IMAGE_NAME}}:{{.VERSION}}'
@@ -17,7 +17,7 @@ profiles:
   build:
     artifacts:
     - docker:
-        dockerfile: ./Dockerfile
+        dockerfile: ./WebApplication/WebApplication/Dockerfile
     tagPolicy:
       envTemplate:
         template: '{{.DOCKER_REGISTRY}}/{{.IMAGE_NAME}}:{{.DIGEST_HEX}}'
