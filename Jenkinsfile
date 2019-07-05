@@ -28,10 +28,10 @@ pipeline {
           //   sh "jx preview --app $APP_NAME --dir ../.."
           // }
 		  sh 'dotnet restore "WebApplication/WebApplication/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
-          dir('./WebApplication/WebApplicationApi') {
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet build "WebApplication.csproj" -c Release -o ./app'
           }
-          dir('./WebApplication/WebApplicationApi') {
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet publish "WebApplication.csproj" -c Release -o ./app'
           }
           sh "skaffold version"
@@ -73,10 +73,10 @@ pipeline {
           sh "jx step tag --version \$(cat VERSION)"
 
           sh 'dotnet restore "WebApplication/WebApplication/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
-          dir('./WebApplication/WebApplicationApi') {
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet build "WebApplication.csproj" -c Release -o ./app'
           }
-          dir('./WebApplication/WebApplicationApi') {
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet publish "WebApplication.csproj" -c Release -o ./app'
           }
 
