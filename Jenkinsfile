@@ -27,8 +27,7 @@ pipeline {
           //   sh "make preview"
           //   sh "jx preview --app $APP_NAME --dir ../.."
           // }
-		  
-		  sh 'dotnet restore "WebApplication/WebApplicationApi/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
+		  sh 'dotnet restore "WebApplication/WebApplication/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
           dir('./WebApplication/WebApplicationApi') {
             sh 'dotnet build "WebApplication.csproj" -c Release -o ./app'
           }
@@ -73,7 +72,7 @@ pipeline {
           sh "echo \$(jx-release-version) > VERSION"
           sh "jx step tag --version \$(cat VERSION)"
 
-          sh 'dotnet restore "WebApplication/WebApplicationApi/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
+          sh 'dotnet restore "WebApplication/WebApplication/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
           dir('./WebApplication/WebApplicationApi') {
             sh 'dotnet build "WebApplication.csproj" -c Release -o ./app'
           }
