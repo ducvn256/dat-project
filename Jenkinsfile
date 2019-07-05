@@ -7,6 +7,7 @@ pipeline {
     APP_NAME = 'dat-project'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DOCKER_REGISTRY_ORG = 'ducvn256'
+	DOTNET_CLI_TELEMETRY_OPTOUT  = 1
   }
   stages {
     stage('CI Build and push snapshot') {
