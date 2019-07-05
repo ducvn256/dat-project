@@ -7,7 +7,7 @@ pipeline {
     APP_NAME = 'dat-project'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DOCKER_REGISTRY_ORG = 'ducvn256'
-	DOTNET_CLI_TELEMETRY_OPTOUT  = 1
+	DOTNET_CLI_TELEMETRY_OPTOUT  = '1'
   }
   stages {
     stage('CI Build and push snapshot') {
@@ -28,7 +28,7 @@ pipeline {
           //   sh "jx preview --app $APP_NAME --dir ../.."
           // }
 		  
-		  
+		  sh 'dotnet dev-certs https --trust'
 		  sh 'dotnet restore "WebApplication/WebApplicationApi/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
           dir('./WebApplication/WebApplicationApi') {
             sh 'dotnet build "WebApplication.csproj" -c Release -o ./app'
