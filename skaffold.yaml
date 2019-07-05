@@ -16,7 +16,7 @@ profiles:
 - name: dev
   build:
     artifacts:
-      docker:
+    - docker:
         dockerfile: ./Dockerfile
     tagPolicy:
       envTemplate:
