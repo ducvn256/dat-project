@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label "jenkins-jx-base"
+    label "jenkins-dotnet22"
   }
   environment {
     ORG = 'ducvn256'
