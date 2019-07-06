@@ -64,7 +64,7 @@ pipeline {
         container('dotnet22') {
 
           // ensure we're not on a detached head
-          sh "git checkout develop"
+          sh "git checkout master"
           sh "git config --global credential.helper store"
           sh "jx step git credentials"
 
