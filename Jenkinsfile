@@ -7,6 +7,7 @@ pipeline {
     APP_NAME = 'dat-project'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
     DOCKER_REGISTRY_ORG = 'ducvn256'
+	DOTNET_CLI_TELEMETRY_OPTOUT  = '1'
   }
   stages {
     stage('CI Build and push snapshot') {
@@ -26,13 +27,11 @@ pipeline {
           //   sh "make preview"
           //   sh "jx preview --app $APP_NAME --dir ../.."
           // }
-		  
-		  
-		  sh 'dotnet restore "WebApplication/WebApplicationApi/WebApplication.csproj" --configfile Api/Nuget.config -nowarn:msb3202,nu1503 --verbosity diag'
-          dir('./WebApplication/WebApplicationApi') {
+		  sh 'dotnet restore "WebApplication/WebApplication/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet build "WebApplication.csproj" -c Release -o ./app'
           }
-          dir('./WebApplication/WebApplicationApi') {
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet publish "WebApplication.csproj" -c Release -o ./app'
           }
           sh "skaffold version"
@@ -73,11 +72,11 @@ pipeline {
           sh "echo \$(jx-release-version) > VERSION"
           sh "jx step tag --version \$(cat VERSION)"
 
-          sh 'dotnet restore "WebApplication/WebApplicationApi/WebApplication.csproj" --configfile Api/Nuget.config -nowarn:msb3202,nu1503 --verbosity diag'
-          dir('./WebApplication/WebApplicationApi') {
+          sh 'dotnet restore "WebApplication/WebApplication/WebApplication.csproj" -nowarn:msb3202,nu1503 --verbosity diag'
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet build "WebApplication.csproj" -c Release -o ./app'
           }
-          dir('./WebApplication/WebApplicationApi') {
+          dir('./WebApplication/WebApplication') {
             sh 'dotnet publish "WebApplication.csproj" -c Release -o ./app'
           }
 
