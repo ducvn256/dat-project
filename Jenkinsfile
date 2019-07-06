@@ -91,7 +91,7 @@ pipeline {
         branch 'master'
       }
       steps {
-        container('jx-base') {
+        container('dotnet22') {
           dir('./charts/dat-project') {
             sh "jx step changelog --version v\$(cat ../../VERSION)"
 
